@@ -22,6 +22,12 @@ class NetworksController < ApplicationController
 		end
 	end
 
+	def destroy
+		@network = Network.find(params[:id])
+		@network.destroy
+		redirect_to networks_path
+	end
+
 	private
 		def network_params
 			params[:network].permit(:title,:input,:middle,:output)

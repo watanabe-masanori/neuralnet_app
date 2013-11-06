@@ -6,5 +6,19 @@
 <p>出力ニューロンの数 : <%= @network.output %></p>
 <p>結合度 : <%= @network.weight %></p>
 
+<ul>
+<% @network.teachers.each do |teacher| %>
+	<li>
+		<%= link_to teacher.data, network_teacher_path(teacher.network_id, teacher.id) %>
+		<%= link_to "[Delete]", network_teacher_path(teacher.network_id, teacher.id), method: :delete, data:{ confirm: "この入力データを削除してもよろしいですか？"} %>
+	</li>
+<% end%>
+<li>
+	<%= form_for [@network, @network.teachers.build] do |f| %>
+		<%= f.text_field :data %>
+		<%= f.submit %>
+	<% end %>
+</li>
+</ul>
 
 

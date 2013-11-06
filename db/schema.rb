@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106105100) do
+ActiveRecord::Schema.define(version: 20131106121147) do
 
   create_table "networks", force: true do |t|
     t.string   "title"
@@ -22,5 +22,14 @@ ActiveRecord::Schema.define(version: 20131106105100) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "teachers", force: true do |t|
+    t.string   "data"
+    t.integer  "network_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "teachers", ["network_id"], name: "index_teachers_on_network_id"
 
 end

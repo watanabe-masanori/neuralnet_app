@@ -1,5 +1,7 @@
 Neuralnet::Application.routes.draw do
-  resources :networks
+  resources :networks do
+    resources :teachers, only: [:create, :show, :destroy]
+  end
   root 'networks#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
