@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  input: 1
+  middle: 1
+  output: 1
+  weight: MyString
+
+two:
+  title: MyString
+  input: 1
+  middle: 1
+  output: 1
+  weight: MyString

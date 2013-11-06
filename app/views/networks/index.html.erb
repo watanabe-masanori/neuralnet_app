@@ -1,0 +1,9 @@
+<h1>作成済みニューラルネット一覧</h1>
+
+<ul>
+	<% @networks.each do |nn| %>
+		<li><%= link_to nn.title, network_path(nn.id) %></li>
+	<% end %>
+</ul>
+
+<p><%= link_to "新規作成", new_network_path %></p>

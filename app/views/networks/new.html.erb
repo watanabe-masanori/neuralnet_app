@@ -1,0 +1,8 @@
+<h1>ニューラルネットの新規作成</h1>
+<%= form_for @network do |nn| %>
+	<p>ネットワーク名<%= nn.text_field :title %></p>
+	<p>入力ニューロンの数<%= nn.text_field :input %></p>
+	<p>中間ニューロンの数<%= nn.text_field :middle %></p>
+	<p>出力ニューロンの数<%= nn.text_field :output %></p>
+	<p><%= nn.submit %></p>
+<% end %>
