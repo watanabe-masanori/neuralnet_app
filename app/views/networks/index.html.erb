@@ -2,8 +2,10 @@
 
 <ul>
 	<% @networks.each do |nn| %>
-		<li><%= link_to nn.title, network_path(nn.id) %>
-		<%= link_to "[Delete]", network_path(nn.id), method: :delete, data:{ confirm: "このネットワークを削除してもよろしいですか？"} %>
+		<li>
+			<%= link_to nn.title, network_path(nn.id) %>
+			<%= link_to "[学習]", edit_network_path(nn.id) %>
+			<%= link_to "[削除]", network_path(nn.id), method: :delete, data:{ confirm: "このネットワークを削除してもよろしいですか？"} %>
 		</li>
 	<% end %>
 </ul>

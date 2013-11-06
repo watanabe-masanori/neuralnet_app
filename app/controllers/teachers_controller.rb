@@ -23,7 +23,7 @@ class TeachersController < ApplicationController
 		end
 
 		#ニューラルネットワークに信号を入れて、出力を得る関数
-		def calc_network_output
+		def calc_network_output(dError)
 			inputArray = @teacher.data.split(",")
 			iInput = @network.input
 			iMiddle = @network.middle
