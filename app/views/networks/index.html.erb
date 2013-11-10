@@ -3,11 +3,13 @@
 <ul>
 	<% @networks.each do |nn| %>
 		<li>
-			<%= link_to nn.title, network_path(nn.id) %>
-			<%= link_to "[学習]", edit_network_path(nn.id) %>
+			<%= link_to nn.title, network_path(nn.id)%>
+			<%= link_to("[学習]", edit_network_path(nn.id) , :remote => true) %>
 			<%= link_to "[削除]", network_path(nn.id), method: :delete, data:{ confirm: "このネットワークを削除してもよろしいですか？"} %>
 		</li>
 	<% end %>
 </ul>
+
+<div id="result"></div>
 
 <p><%= link_to "新規作成", new_network_path %></p>

@@ -22,6 +22,7 @@ class NetworksController < ApplicationController
 		@output = study
 		@network.weight = @output
 		@network.save
+
 		#一覧画面にリダイレクト
 		#redirect_to networks_path
 	end
@@ -148,15 +149,15 @@ class NetworksController < ApplicationController
 		
 		#-0.5～0.5までの乱数文字列を発生
 		def rand2
-			return ((rand-0.5).round(2)).to_s
+			return ((rand-0.5).round(4)).to_s
 		end
 
 		#教師信号を使って、学習する関数
 		def study()
 			log = Logger.new(STDOUT)
-
-			dAlpha = 0.1 #学習係数
-			dError = 0
+			
+			dAlpha = 1 #学習係数
+			@dError = 0
 			iInput = @network.input
 			iMiddle = @network.middle
 			iOutput = @network.output
@@ -182,11 +183,11 @@ class NetworksController < ApplicationController
 					teacherArray = elem.data.split(",")
 					hashResult = calc_network_output(elem.data,hashMiddleW,hashOutputW)
 					#(2)誤差の計算
-					dError = 0
+					@dError = 0
 					for i in 0..(iOutput - 1 ) do 
 						strKey = "O" + i.to_s
 						dTmp = hashResult[strKey].to_f
-						dError += (teacherArray[iInput + i].to_f - dTmp) * (teacherArray[iInput + i].to_f - dTmp)
+						@dError += (teacherArray[iInput + i].to_f - dTmp) * (teacherArray[iInput + i].to_f - dTmp)
 					end
 
 					#(3)出力層の結合度の修正
@@ -228,7 +229,7 @@ class NetworksController < ApplicationController
 						end
 					end
 				}
-				log.debug(dError)
+				#log.debug(@dError)
 			end
 			#最後に重みを文字列形式にして返す
 			strTmp = ""
@@ -237,9 +238,9 @@ class NetworksController < ApplicationController
 				for i in 0..(iInput - 1) do
 					strKeyW = "W" + i.to_s + j.to_s
 					if i==0 && j==0
-						strTmp = hashMiddleW[strKeyW].to_f.round(2).to_s
+						strTmp = hashMiddleW[strKeyW].to_f.round(4).to_s
 					else
-						strTmp = strTmp + "," + hashMiddleW[strKeyW].to_f.round(2).to_s
+						strTmp = strTmp + "," + hashMiddleW[strKeyW].to_f.round(4).to_s
 					end
 				end
 			end
@@ -250,13 +251,13 @@ class NetworksController < ApplicationController
 				for i in 0..(iMiddle - 1) do
 					strKeyW = "W" + i.to_s + j.to_s
 					if i==0 && j==0 
-						strTmp = strTmp + hashOutputW[strKeyW].to_f.round(2).to_s
+						strTmp = strTmp + hashOutputW[strKeyW].to_f.round(4).to_s
 					else
-						strTmp = strTmp + "," + hashOutputW[strKeyW].to_f.round(2).to_s
+						strTmp = strTmp + "," + hashOutputW[strKeyW].to_f.round(4).to_s
 					end
 				end
 			end
-			dError = dTmp
+			@dError = @dError.round(8)
 			return strTmp;			
 
 			#return hashMiddleW #@teachers[0].data.split(",")		

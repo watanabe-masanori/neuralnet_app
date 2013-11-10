@@ -23,7 +23,7 @@ class TeachersController < ApplicationController
 		end
 
 		#ニューラルネットワークに信号を入れて、出力を得る関数
-		def calc_network_output(dError)
+		def calc_network_output
 			inputArray = @teacher.data.split(",")
 			iInput = @network.input
 			iMiddle = @network.middle
@@ -50,8 +50,8 @@ class TeachersController < ApplicationController
 
 			weightArray = (@network.weight.split(";"))[iLayer].split(",")
 			iCount = 0
-			for j in 0..(num2-1) do 
-				for i in 0..(num1-1) do
+			for j in 0..(num2 - 1) do 
+				for i in 0..(num1 - 1) do
 					strKey = "W" + i.to_s + j.to_s
 					hashWeight[strKey] = weightArray[iCount]
 					iCount += 1
