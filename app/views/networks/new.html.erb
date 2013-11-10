@@ -4,5 +4,19 @@
 	<p>入力ニューロンの数<%= nn.text_field :input %></p>
 	<p>中間ニューロンの数<%= nn.text_field :middle %></p>
 	<p>出力ニューロンの数<%= nn.text_field :output %></p>
+	<% if @network.errors.any? %>
+		<% if @network.title.empty? %>
+			<p style="font-size:90%;color:#ff0000">ネットワーク名は空にすることはできません。</p>
+		<% end %>
+		<% if @network.input.nil? || !(@network.input >= 1 && @network.input <= 9) %>
+			<p style="font-size:90%;color:#ff0000">入力ニューロンの数は1～9の値を入力してください</p>
+		<% end %>
+		<% if @network.middle.nil? || !(@network.middle >= 1 && @network.middle <= 9) %>
+			<p style="font-size:90%;color:#ff0000">中間ニューロンの数は1～9の値を入力してください</p>
+		<% end %>
+		<% if @network.output.nil? || !(@network.output >= 1 && @network.output <= 9) %>
+			<p style="font-size:90%;color:#ff0000">出力ニューロンの数は1～9の値を入力してください</p>
+		<% end %>
+	<% end %>	
 	<p><%= nn.submit %></p>
 <% end %>

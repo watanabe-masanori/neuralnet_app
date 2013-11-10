@@ -29,7 +29,9 @@ class NetworksController < ApplicationController
 
 	def create
 		@network = Network.new(network_params)
-		@network.weight = create_weight(@network.input,@network.middle,@network.output)
+		if !@network.input.nil? && !@network.middle.nil? && !@network.output.nil? 
+			@network.weight = create_weight(@network.input,@network.middle,@network.output)
+		end
 		if @network.save
 			redirect_to networks_path
 		else
