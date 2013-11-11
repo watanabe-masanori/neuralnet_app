@@ -231,7 +231,7 @@ class NetworksController < ApplicationController
 						end
 					end
 				}
-				#log.debug(@dError)
+				log.debug(@dError)
 			end
 			#最後に重みを文字列形式にして返す
 			strTmp = ""

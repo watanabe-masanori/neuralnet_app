@@ -1,4 +1,5 @@
 Neuralnet::Application.routes.draw do
+  get "help/index"
   resources :networks do
     resources :teachers, only: [:create, :show, :destroy]
   end
